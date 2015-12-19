@@ -51,4 +51,7 @@ public:
     	_delay_ms(100);
     	while (CHECK(BUSY));
     }
+
+    void setModelClass(unsigned modelClass) {
+    }
 };
