@@ -41,6 +41,7 @@ private:
 	uint16_t _rx_delay_stopbit;
 	uint16_t _tx_delay;
 	// private static method for timing
+#ifdef __AVR__
 	static inline void tunedDelay(uint16_t delay){ 
 	  uint8_t tmp=0;
 
@@ -53,6 +54,11 @@ private:
 		: "0" (delay)
 		);
 	}
+#else
+	static inline void tunedDelay(uint16_t delay) {
+		delayMicroseconds(delay >> 1);
+	}
+#endif
 	uint16_t _inverse_logic: 1;
 	volatile uint8_t *_receivePortRegister;
 	uint8_t _transmitBitMask;
